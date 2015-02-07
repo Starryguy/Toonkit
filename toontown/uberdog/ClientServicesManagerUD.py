@@ -1,4 +1,4 @@
-import semidbm
+import anydbm
 import base64
 from direct.directnotify.DirectNotifyGlobal import directNotify
 from direct.distributed.DistributedObjectGlobalUD import DistributedObjectGlobalUD
@@ -87,7 +87,7 @@ class AccountDB:
 
         filename = simbase.config.GetString(
             'account-bridge-filename', 'account-bridge')
-        self.dbm = semidbm.open(filename, 'c')
+        self.dbm = anydbm.open(filename, 'c')
 
     def addNameRequest(self, avId, name):
         return 'Success'
@@ -102,7 +102,7 @@ class AccountDB:
         pass  # Inheritors should override this.
 
     def storeAccountID(self, userId, accountId, callback):
-        self.dbm[str(userId)] = str(accountId)  # semidbm only allows strings.
+        self.dbm[str(userId)] = str(accountId)  # anydbm only allows strings.
         if getattr(self.dbm, 'sync', None):
             self.dbm.sync()
             callback(True)
