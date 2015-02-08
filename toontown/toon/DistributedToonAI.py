@@ -129,7 +129,8 @@ class DistributedToonAI(DistributedPlayerAI.DistributedPlayerAI, DistributedSmoo
         self.fishingTrophies = []
         self.trackArray = []
         self.emoteAccess = [0] * 26
-        self.maxMoney = 10000
+        if not config.GetBool('want-max-bean-quests', False):
+            self.maxMoney = config.GetInt('max-beans-jar', 10000)
         self.maxBankMoney = ToontownGlobals.MaxBankMoney
         self.gardenSpecials = []
         self.houseId = 0
@@ -2326,8 +2327,26 @@ class DistributedToonAI(DistributedPlayerAI.DistributedPlayerAI, DistributedSmoo
     def getSpeedChatStyleIndex(self):
         return self.speedChatStyleIndex
 
+    # I was hoping the TTI developers kept these after turning of tasks to increase max money,
+    # but they didn't. They even changed toon.dc :/
+    def b_setMaxMoney(self, maxMoney):
+        self.setMaxMoney(maxMoney)
+        self.d_setMaxMoney(self.maxMoney)  # Self because setMaxMoney might not change the actual value
+        if self.getMoney() > maxMoney:
+            self.b_setBankMoney(self.bankMoney + (self.getMoney() - self.maxMoney))
+            self.b_setMoney(self.maxMoney)
+
+    def d_setMaxMoney(self, maxMoney):
+        self.sendUpdate('setMaxMoney', [maxMoney])
+
+    def setMaxMoney(self, maxMoney):
+        if config.GetBool('want-max-bean-quests'):
+            self.maxMoney = maxMoney
+        else:
+            self.maxMoney = config.GetInt('max-beans-jar', 10000)
+
     def getMaxMoney(self):
-        return 10000
+        return self.maxMoney
 
     def addMoney(self, deltaMoney):
         money = deltaMoney + self.money

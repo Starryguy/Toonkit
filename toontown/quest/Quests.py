@@ -4727,6 +4727,16 @@ RequiredRewardTrackDict = {
     DL_TIER + 3: (100, 101, 102, 102, 207),
     ELDER_TIER: () }
 
+if config.GetBool('want-max-bean-quests', False):
+    RequiredRewardTrackDict[TT_TIER + 2] += (700,)
+    RequiredRewardTrackDict[DD_TIER + 1] += (701,)
+    RequiredRewardTrackDict[DG_TIER] += (702,)
+    RequiredRewardTrackDict[MM_TIER + 1] += (703,)
+    RequiredRewardTrackDict[BR_TIER] += (704,)
+    RequiredRewardTrackDict[DL_TIER] += (705,)
+    RequiredRewardTrackDict[DL_TIER + 1] += (706,)
+    RequiredRewardTrackDict[DL_TIER + 3] += (707,)
+
 OptionalRewardTrackDict = {
     TT_TIER: (),
     TT_TIER + 1: (),
