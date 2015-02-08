@@ -4728,14 +4728,23 @@ RequiredRewardTrackDict = {
     ELDER_TIER: () }
 
 if config.GetBool('want-max-bean-quests', False):
-    RequiredRewardTrackDict[TT_TIER + 2] += (700,)
-    RequiredRewardTrackDict[DD_TIER + 1] += (701,)
-    RequiredRewardTrackDict[DG_TIER] += (702,)
-    RequiredRewardTrackDict[MM_TIER + 1] += (703,)
-    RequiredRewardTrackDict[BR_TIER] += (704,)
-    RequiredRewardTrackDict[DL_TIER] += (705,)
-    RequiredRewardTrackDict[DL_TIER + 1] += (706,)
-    RequiredRewardTrackDict[DL_TIER + 3] += (707,)
+    posTT = config.GetInt('max-bean-quests-pos-tt', 20)
+    posDD = config.GetInt('max-bean-quests-pos-dd', 18)
+    posDG = config.GetInt('max-bean-quests-pos-dg', 7)
+    posMM = config.GetInt('max-bean-quests-pos-mm', 18)
+    posBR = config.GetInt('max-bean-quests-pos-br', 3)
+    posDL1 = config.GetInt('max-bean-quests-pos-dl-1', 5)
+    posDL2 = config.GetInt('max-bean-quests-pos-dl-2', 10)
+    posDL3 = config.GetInt('max-bean-quests-pos-dl-3', 15)
+
+    RequiredRewardTrackDict[TT_TIER + 2] = RequiredRewardTrackDict[TT_TIER + 2][:posTT] + (700,) + RequiredRewardTrackDict[TT_TIER + 2][posTT:]
+    RequiredRewardTrackDict[DD_TIER + 1] = RequiredRewardTrackDict[DD_TIER + 1][:posDD] + (701,) + RequiredRewardTrackDict[DD_TIER + 1][posDD:]
+    RequiredRewardTrackDict[DG_TIER] = RequiredRewardTrackDict[DG_TIER][:posDG] + (702,) + RequiredRewardTrackDict[DG_TIER][posDG:]
+    RequiredRewardTrackDict[MM_TIER + 1] = RequiredRewardTrackDict[MM_TIER + 1][:posMM] + (703,) + RequiredRewardTrackDict[MM_TIER + 1][posMM:]
+    RequiredRewardTrackDict[BR_TIER + 1] = RequiredRewardTrackDict[BR_TIER + 1][:posBR] + (704,) + RequiredRewardTrackDict[BR_TIER + 1][posBR:]
+    RequiredRewardTrackDict[DL_TIER] = RequiredRewardTrackDict[DL_TIER][:posDL1] + (705,) + RequiredRewardTrackDict[DL_TIER][posDL1:]
+    RequiredRewardTrackDict[DL_TIER + 1] = RequiredRewardTrackDict[DL_TIER + 1][:posDL2] + (706,) + RequiredRewardTrackDict[DL_TIER + 1][posDL2:]
+    RequiredRewardTrackDict[DL_TIER + 3] = RequiredRewardTrackDict[DL_TIER + 3][:posDL3] + (707,) + RequiredRewardTrackDict[DL_TIER + 3][posDL3:]
 
 OptionalRewardTrackDict = {
     TT_TIER: (),
