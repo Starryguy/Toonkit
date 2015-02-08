@@ -3,7 +3,7 @@
 # Jellybeans
 # Want Jellybean tasks?
 
-want-max-bean-quests #t
+want-max-bean-quests #f
 
 # Max beans
 # Has no effect if bean tasks are on
