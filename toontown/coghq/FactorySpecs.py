@@ -1,6 +1,9 @@
 from toontown.toonbase import ToontownGlobals
-import SellbotLegFactorySpec
-import SellbotLegFactoryCogs
+#Old:
+#import SellbotLegFactorySpec
+#import SellbotLegFactoryCogs
+#New:
+from toonkit.config import sellbotFactory
 import LawbotLegFactorySpec
 import LawbotLegFactoryCogs
 
@@ -12,9 +15,9 @@ def getCogSpecModule(factoryId):
     return CogSpecModules[factoryId]
 
 
-FactorySpecModules = {ToontownGlobals.SellbotFactoryInt: SellbotLegFactorySpec,
+FactorySpecModules = {ToontownGlobals.SellbotFactoryInt: sellbotFactory(),
  ToontownGlobals.LawbotOfficeInt: LawbotLegFactorySpec}
-CogSpecModules = {ToontownGlobals.SellbotFactoryInt: SellbotLegFactoryCogs,
+CogSpecModules = {ToontownGlobals.SellbotFactoryInt: sellbotFactory(),
  ToontownGlobals.LawbotOfficeInt: LawbotLegFactoryCogs}
 if __dev__:
     import FactoryMockupSpec
